@@ -2,10 +2,19 @@ import prisma from "@/prisma/client";
 import { Box,Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import EditIssueButton from "./EditIssueButton";
-import IssueDetails from "./IssueDetails";
+import dynamic from "next/dynamic";
+import LoadingIssueDetailPage from "./loading";
 interface Props {
   params: { id: string };
 }
+
+const IssueDetails = dynamic(
+    () => import('@/app/issues/[id]/IssueDetails'),
+    {
+        ssr: false,
+        loading: ()=> <LoadingIssueDetailPage/>
+    }
+)
 
 const IssueDetailPage = async ({ params }: Props) => {
   //   if (typeof params.id !== "number") notFound();
