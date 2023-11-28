@@ -4,11 +4,13 @@ import React from "react";
 import { FaBug } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import classnames from "classnames"; // to install classnames -> npm i classnames@2.3.2
+import { useSession } from "next-auth/react";
+import { Box } from "@radix-ui/themes";
 
 const NavBar = () => {
   const currentPath = usePathname();
 
-  console.log(currentPath);
+  const { status, data: session } = useSession();
 
   const links = [
     { label: "Dashboard", href: "/" },
@@ -35,6 +37,10 @@ const NavBar = () => {
           </li>
         ))}
       </ul>
+      <Box>
+        {status === 'authenticated' && <Link href="/api/auth/signout">Logout</Link>}
+        {status === 'unauthenticated' && <Link href="/api/auth/signin">Login</Link>}
+      </Box>
     </nav>
   );
 };
