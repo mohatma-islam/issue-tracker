@@ -4,9 +4,20 @@ import prisma from "@/prisma/client";
 import { IssueActions } from "./IssueActions";
 import delay from "delay";
 import AssigneeSelect from "../[id]/AssigneeSelect";
+import { Status } from "@prisma/client";
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
+interface Props {
+  searchParams: { status: Status };
+}
+
+const IssuesPage = async ({ searchParams }: Props) => {
+  const statuses = Object.values(Status);
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+  const issues = await prisma.issue.findMany({
+    where: { status },
+  });
   await delay(2000);
   return (
     <div>
@@ -37,7 +48,7 @@ const IssuesPage = async () => {
                 </div>
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
-                <AssigneeSelect issue={issue}/>
+                <AssigneeSelect issue={issue} />
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
                 <IssueStatusBadge status={issue.status} />
@@ -52,6 +63,6 @@ const IssuesPage = async () => {
     </div>
   );
 };
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default IssuesPage;
