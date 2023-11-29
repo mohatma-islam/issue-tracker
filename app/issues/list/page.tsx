@@ -3,6 +3,7 @@ import { IssueStatusBadge, Link } from "@/app/components/index";
 import prisma from "@/prisma/client";
 import { IssueActions } from "./IssueActions";
 import delay from "delay";
+import AssigneeSelect from "../[id]/AssigneeSelect";
 
 const IssuesPage = async () => {
   const issues = await prisma.issue.findMany();
@@ -14,6 +15,9 @@ const IssuesPage = async () => {
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Issue Assigned
+            </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell className="hidden md:table-cell">
               Status
             </Table.ColumnHeaderCell>
@@ -31,6 +35,9 @@ const IssuesPage = async () => {
                 <div className="block md:hidden">
                   <IssueStatusBadge status={issue.status} />
                 </div>
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                <AssigneeSelect issue={issue}/>
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
                 <IssueStatusBadge status={issue.status} />
