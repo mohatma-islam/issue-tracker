@@ -34,6 +34,8 @@ const DeleteIssueButton = dynamic(
   }
 );
 
+
+
 const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
   const issue = await prisma.issue.findUnique({
