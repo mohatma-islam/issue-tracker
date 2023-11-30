@@ -22,7 +22,7 @@ export async function PATCH(
     where: { id: parseInt(params.id) },
   });
 
-  const { assignedToUserId, title, description } = body;
+  const { assignedToUserId, title, description, status } = body;
   if (assignedToUserId && assignedToUserId !== "null" ) {
     const user = await prisma.user.findUnique({
       where: { id: assignedToUserId },
@@ -39,7 +39,8 @@ export async function PATCH(
     data: {
       title,
       description,
-      assignedToUserId: assignedToUserId !== "null" ? assignedToUserId : null
+      assignedToUserId: assignedToUserId !== "null" ? assignedToUserId : null,
+      status
     },
   });
 
