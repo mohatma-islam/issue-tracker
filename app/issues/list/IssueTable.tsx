@@ -12,6 +12,7 @@ export interface IssueQuery {
   orderBy: keyof Issue;
   page: string;
   orderDirection: "asc" | "desc";
+  assignedToUserId: string;
 }
 
 interface Props {

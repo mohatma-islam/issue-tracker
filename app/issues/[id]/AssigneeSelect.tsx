@@ -29,6 +29,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   return (
     <>
       <Select.Root
+        key={`${issue.id}-${issue.assignedToUserId}`}
         defaultValue={issue.assignedToUserId || ""}
         onValueChange={assignIssueHandler}
       >

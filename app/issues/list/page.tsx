@@ -17,8 +17,6 @@ const IssuesPage = async ({ searchParams }: Props) => {
     ? searchParams.status
     : undefined;
 
-  const where = { status };
-
   const page = parseInt(searchParams.page) || 1;
   const pageSize = 5;
 
@@ -26,6 +24,11 @@ const IssuesPage = async ({ searchParams }: Props) => {
     ? { [searchParams.orderBy]: searchParams.orderDirection }
     : undefined;
 
+  const assignedToUserId = searchParams.assignedToUserId
+    ? searchParams.assignedToUserId
+    : undefined;
+
+  const where = { status, assignedToUserId };
 
   const issues = await prisma.issue.findMany({
     where,
@@ -58,4 +61,3 @@ export const metadata: Metadata = {
 };
 
 export default IssuesPage;
-
