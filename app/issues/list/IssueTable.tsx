@@ -3,9 +3,10 @@ import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 import { Table } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
-import AssigneeSelect from "../[id]/AssigneeSelect";
+import AssigneeSelect from "../../AssignTask";
 import NextLink from "next/link";
 import { Issue, Status } from "@prisma/client";
+import UpdateIssueStatus from "@/app/UpdateIssueStatus";
 
 export interface IssueQuery {
   status: Status;
@@ -66,7 +67,7 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               <AssigneeSelect issue={issue} />
             </Table.Cell>
             <Table.Cell className="hidden md:table-cell">
-              <IssueStatusBadge status={issue.status} />
+              <UpdateIssueStatus issue={issue} />
             </Table.Cell>
             <Table.Cell className="hidden md:table-cell">
               {issue.createdAt.toDateString()}

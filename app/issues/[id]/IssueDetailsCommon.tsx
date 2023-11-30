@@ -1,29 +1,29 @@
 "use client";
 import { Box, Flex } from "@radix-ui/themes";
-import React, { useState } from "react";
-import AssigneeSelect from "./AssigneeSelect";
+import AssigneeSelect from "../../AssignTask";
 import DeleteIssueButton from "./DeleteIssueButton";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
-import UpdateIssueStatus from "./UpdateIssueStatus";
 import { Issue } from "@prisma/client";
+import UpdateIssueStatus from "@/app/UpdateIssueStatus";
 
-const IssueDetailsCommon = ({ issue, session }: { issue: Issue; session: any }) => {
-  const [issueStatus, setIssueStatus] = useState(issue.status);
+const IssueDetailsCommon = ({
+  issue,
+  session,
+}: {
+  issue: Issue;
+  session: any;
+}) => {
   return (
     <>
       <Box className="md:col-span-4">
-        <IssueDetails issue={issue} issueStatus={issueStatus} />
+        <IssueDetails issue={issue} />
       </Box>
       {session && (
         <Box>
           <Flex direction="column" gap="4">
             <AssigneeSelect issue={issue} />
-            <UpdateIssueStatus
-              issue={issue}
-              issueStatus={issueStatus}
-              setIssueStatus={setIssueStatus}
-            />
+            <UpdateIssueStatus issue={issue} />
             <EditIssueButton issueId={issue.id} />
             <DeleteIssueButton issueId={issue.id} />
           </Flex>

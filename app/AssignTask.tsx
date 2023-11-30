@@ -4,9 +4,9 @@ import { Select } from "@radix-ui/themes";
 import axios from "axios";
 import { Skeleton } from "@/app/components";
 import toast, { Toaster } from "react-hot-toast";
-import {fetchAllUsers} from "@/app/FetchAllUsers";
+import { fetchAllUsers } from "@/app/FetchAllUsers";
 
-const AssigneeSelect = ({ issue }: { issue: Issue }) => {
+const AssignTask = ({ issue }: { issue: Issue }) => {
   const { data: users, error, isLoading } = fetchAllUsers();
 
   if (isLoading) return <Skeleton />;
@@ -29,14 +29,14 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   return (
     <>
       <Select.Root
-        key={`${issue.id}-${issue.assignedToUserId}`}
+        key={issue.id}
         defaultValue={issue.assignedToUserId || ""}
         onValueChange={assignIssueHandler}
       >
         <Select.Trigger placeholder="Assign.." />
         <Select.Content>
           <Select.Group>
-            <Select.Label>Suggestions</Select.Label>
+            <Select.Label>Assign Task:</Select.Label>
             <Select.Item value="null">Unassigned</Select.Item>
             {users?.map((user) => (
               <Select.Item key={user.id} value={user.id}>
@@ -51,4 +51,4 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   );
 };
 
-export default AssigneeSelect;
+export default AssignTask;

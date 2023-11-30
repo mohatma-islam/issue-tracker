@@ -3,15 +3,12 @@ import { Issue, Status } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { IssueStatusBadge } from "./components";
 
 const UpdateIssueStatus = ({
   issue,
-  issueStatus,
-  setIssueStatus,
 }: {
   issue: Issue;
-  issueStatus: Status;
-  setIssueStatus: (status: Status) => void;
 }) => {
   const containers: {
     label: string;
@@ -28,7 +25,6 @@ const UpdateIssueStatus = ({
         status: status,
       })
       .then(() => {
-        setIssueStatus(status);
         toast.success("Issue updated!");
       })
       .catch(() => {
@@ -41,14 +37,19 @@ const UpdateIssueStatus = ({
       <Select.Root
         defaultValue={issue.status}
         onValueChange={updateIssueHandler}
+        key={issue.id}
       >
         <Select.Trigger placeholder="Update Status.." />
         <Select.Content>
           <Select.Group>
-            <Select.Label>Suggestions</Select.Label>
+            <Select.Label>Update Status:</Select.Label>
             {containers.map((container) => (
-              <Select.Item key={container.label} value={container.status}>
-                {container.label}
+              <Select.Item
+                key={container.label}
+                value={container.status}
+                className="hover:bg-neutral-50"
+              >
+                <IssueStatusBadge status={container.status} />
               </Select.Item>
             ))}
           </Select.Group>
