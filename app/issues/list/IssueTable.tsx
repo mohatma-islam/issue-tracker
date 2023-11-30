@@ -1,12 +1,14 @@
 import { IssueStatusBadge } from "@/app/components";
 import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
-import { Table } from "@radix-ui/themes";
+import { Flex, Table } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
 import AssigneeSelect from "../../AssignTask";
 import NextLink from "next/link";
 import { Issue, Status } from "@prisma/client";
 import UpdateIssueStatus from "@/app/UpdateIssueStatus";
+import EditIssueButton from "../[id]/EditIssueButton";
+import DeleteIssueButton from "../[id]/DeleteIssueButton";
 
 export interface IssueQuery {
   status: Status;
@@ -43,7 +45,8 @@ const IssueTable = ({ searchParams, issues }: Props) => {
               >
                 {column.label}
               </NextLink>
-              {column.value === searchParams.orderBy &&
+              {column.value &&
+                column.value === searchParams.orderBy &&
                 (searchParams.orderDirection === "asc" ? (
                   <ArrowUpIcon className="inline" />
                 ) : (
@@ -72,6 +75,12 @@ const IssueTable = ({ searchParams, issues }: Props) => {
             <Table.Cell className="hidden md:table-cell">
               {issue.createdAt.toDateString()}
             </Table.Cell>
+            <Table.Cell className="hidden md:table-cell">
+              <Flex gap="3">
+                <EditIssueButton issueId={issue.id}/>
+                <DeleteIssueButton issueId={issue.id} />
+              </Flex>
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
@@ -80,14 +89,15 @@ const IssueTable = ({ searchParams, issues }: Props) => {
 };
 
 const columns: {
-  label: string;
-  value: keyof Issue;
+  label?: string;
+  value?: keyof Issue;
   className?: string;
 }[] = [
   { label: "Issue", value: "title" },
-  { label: "Assigned To", value: "assignedToUserId" },
+  { label: "Assigned To", value: "assignedToUserId", className: "hidden md:table-cell" },
   { label: "Status", value: "status", className: "hidden md:table-cell" },
   { label: "Created", value: "createdAt", className: "hidden md:table-cell" },
+  { label: "Actions", className: "hidden md:table-cell" },
 ];
 
 export const columnNames = columns.map((column) => column.value);

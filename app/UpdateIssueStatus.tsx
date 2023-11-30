@@ -47,7 +47,7 @@ const UpdateIssueStatus = ({
               <Select.Item
                 key={container.label}
                 value={container.status}
-                className="hover:bg-neutral-50"
+                className="hover:bg-neutral-100"
               >
                 <IssueStatusBadge status={container.status} />
               </Select.Item>

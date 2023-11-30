@@ -11,7 +11,7 @@ export const IssueActions = () => {
         <IssueStatusFilter />
         <IssueAssigneeFilter />
       </Flex>
-      <Button>
+      <Button className="invisible md:visible">
         <Link href="/issues/new">New Issue</Link>
       </Button>
     </Flex>

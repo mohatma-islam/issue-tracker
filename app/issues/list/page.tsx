@@ -1,6 +1,5 @@
 import prisma from "@/prisma/client";
 import { IssueActions } from "./IssueActions";
-import delay from "delay";
 import { Status } from "@prisma/client";
 import Pagination from "@/app/components/Pagination";
 import IssueTable, { IssueQuery, columnNames } from "./IssueTable";
@@ -38,8 +37,6 @@ const IssuesPage = async ({ searchParams }: Props) => {
   });
 
   const issueCount = await prisma.issue.count({ where });
-
-  await delay(2000);
 
   return (
     <Flex direction="column" gap="3">
