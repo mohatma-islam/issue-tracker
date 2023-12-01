@@ -5,7 +5,7 @@ import { IssueStatusBadge } from "../../components";
 import Link from "next/link";
 import axios from "axios";
 import { Status, User } from "@prisma/client";
-import LoadinglatestIssuePage from "./LoadingLatestIssuePage";
+import LoadinglatestIssuePage from "./loadingLatestIssuePage";
 
 interface Issue {
   id: number;

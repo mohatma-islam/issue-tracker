@@ -4,7 +4,7 @@ import { Select } from "@radix-ui/themes";
 import axios from "axios";
 import { Skeleton } from "@/app/components";
 import toast, { Toaster } from "react-hot-toast";
-import { fetchAllUsers } from "@/app/FetchAllUsers";
+import { fetchAllUsers } from "@/app/components/FetchAllUsers";
 
 const AssignTask = ({ issue }: { issue: Issue }) => {
   const { data: users, error, isLoading } = fetchAllUsers();

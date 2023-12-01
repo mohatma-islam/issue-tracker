@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchAllUsers } from "@/app/FetchAllUsers";
+import { fetchAllUsers } from "@/app/components/FetchAllUsers";
 import { Select } from "@radix-ui/themes";
 import { useRouter, useSearchParams } from "next/navigation";
 

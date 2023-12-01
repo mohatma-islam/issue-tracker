@@ -3,7 +3,7 @@ import { Issue, Status } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { IssueStatusBadge } from "./components";
+import { IssueStatusBadge } from ".";
 
 const UpdateIssueStatus = ({
   issue,

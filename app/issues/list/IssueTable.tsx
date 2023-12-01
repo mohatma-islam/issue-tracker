@@ -3,12 +3,12 @@ import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 import { Flex, Table } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
-import AssigneeSelect from "../../AssignTask";
+import AssigneeSelect from "../../components/AssignTask";
 import NextLink from "next/link";
 import { Issue, Status } from "@prisma/client";
-import UpdateIssueStatus from "@/app/UpdateIssueStatus";
-import EditIssueButton from "../[id]/EditIssueButton";
-import DeleteIssueButton from "../[id]/DeleteIssueButton";
+import UpdateIssueStatus from "@/app/components/UpdateIssueStatus";
+import EditIssueButton from "../../components/EditIssueButton";
+import DeleteIssueButton from "../../components/DeleteIssueButton";
 
 export interface IssueQuery {
   status: Status;

@@ -4,7 +4,7 @@ import axios from "axios";
 import IssueSummary from "./IssueSummary";
 import IssueChart from "./IssueChart";
 import { Flex } from "@radix-ui/themes";
-import LatestIssues from "./LatestIssues";
+import LatestIssues from "./latestIssues";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(0);

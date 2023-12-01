@@ -4,10 +4,10 @@ import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/api/auth/authOptions";
 import { cache } from "react";
-import AssigneeSelect from "../../AssignTask";
-import UpdateIssueStatus from "@/app/UpdateIssueStatus";
-import DeleteIssueButton from "./DeleteIssueButton";
-import EditIssueButton from "./EditIssueButton";
+import AssigneeSelect from "../../components/AssignTask";
+import UpdateIssueStatus from "@/app/components/UpdateIssueStatus";
+import DeleteIssueButton from "../../components/DeleteIssueButton";
+import EditIssueButton from "../../components/EditIssueButton";
 import IssueDetails from "./IssueDetails";
 interface Props {
   params: { id: string };
