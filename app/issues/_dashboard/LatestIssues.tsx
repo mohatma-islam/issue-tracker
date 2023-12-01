@@ -1,17 +1,42 @@
-import prisma from "@/prisma/client";
+"use client";
 import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes";
-import React from "react";
-import { IssueStatusBadge } from "./components";
+import React, { useEffect, useState } from "react";
+import { IssueStatusBadge } from "../../components";
 import Link from "next/link";
+import axios from "axios";
+import { Status, User } from "@prisma/client";
+import LoadinglatestIssuePage from "./LoadingLatestIssuePage";
 
-const LatestIssues = async () => {
-  const issues = await prisma.issue.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 5,
-    include: {
-      assignedToUser: true,
-    },
-  });
+interface Issue {
+  id: number;
+  title: string;
+  description: string;
+  status: Status;
+  createdAt: Date;
+  updatedAt: Date;
+  assignedToUserId: string | null;
+  assignedToUser: User | null;
+}
+
+const LatestIssues = () => {
+  const [issues, setIssues] = useState<Issue[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchIssues = async () => {
+      const response = await axios.get<Issue[]>(
+        "http://localhost:3000/api/issues"
+      );
+
+      setIssues(response.data);
+      setIsLoading(false);
+    };
+
+    fetchIssues();
+  }, []);
+
+  if (isLoading) return <LoadinglatestIssuePage />;
 
   return (
     <Card>
